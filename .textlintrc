@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "preset-ja-technical-writing": true,
+    "spellcheck-tech-word": true,
+    "prh": {
+      "rulePaths": ["prh.yml"]
+    }
+  }
+}
