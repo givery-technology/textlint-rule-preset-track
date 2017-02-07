@@ -1,11 +1,19 @@
 {
   "name": "textlint-rule-preset-codeprep",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "textlint rule for CODEPREP",
   "main": "lib/textlint-rule-preset-codeprep.js",
   "scripts": {
     "docs:toc": "markdown-toc -i README.md",
     "test": "mocha test/ && (cd example && npm install && npm test)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/givery-technology/textlint-rule-preset-codeprep.git"
+  },
+  "homepage": "https://github.com/givery-technology/textlint-rule-preset-codeprep",
+  "bugs": {
+    "url": "https://github.com/givery-technology/textlint-rule-preset-codeprep/issues"
   },
   "author": "mitsuruog",
   "license": "MIT",
