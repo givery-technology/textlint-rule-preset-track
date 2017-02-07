@@ -1,6 +1,10 @@
 {
   "rules": {
-    "preset-ja-technical-writing": true,
+    "preset-ja-technical-writing": {
+      "no-exclamation-question-mark": {
+        "allowFullWidthExclamation": true
+      }
+    },
     "spellcheck-tech-word": true,
     "prh": {
       "rulePaths": ["prh.yml"]
