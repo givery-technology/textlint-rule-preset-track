@@ -1,4 +1,4 @@
-# textlint-rule-preset-codeprep" [![Build Status](https://travis-ci.org/givery-technology/textlint-rule-preset-codeprep.svg?branch=master)](https://travis-ci.org/givery-technology/textlint-rule-preset-codeprep)
+# textlint-rule-preset-codeprep [![Build Status](https://travis-ci.org/givery-technology/textlint-rule-preset-codeprep.svg?branch=master)](https://travis-ci.org/givery-technology/textlint-rule-preset-codeprep)
 
 [textlint](https://textlint.github.io/) rule for [CODEPREP](https://codeprep.jp/).
 
