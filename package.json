@@ -1,17 +1,46 @@
 {
-  "name": "codeprep-textlint",
+  "name": "textlint-rule-preset-codeprep",
   "version": "1.0.0",
   "description": "textlint rule for CODEPREP",
-  "main": "index.js",
+  "main": "lib/textlint-rule-preset-codeprep.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "docs:toc": "markdown-toc -i README.md",
+    "test": "mocha test/ && (cd example && npm install && npm test)"
   },
   "author": "mitsuruog",
   "license": "MIT",
+  "files": [
+    "src/",
+    "lib/"
+  ],
+  "keywords": [
+    "textlint",
+    "preset"
+  ],
   "dependencies": {
-    "textlint": "^7.2.1",
-    "textlint-rule-preset-ja-technical-writing": "^0.1.3",
+    "textlint-rule-ja-no-abusage": "^1.1.1",
+    "textlint-rule-ja-no-mixed-period": "^1.0.2",
+    "textlint-rule-ja-no-successive-word": "^1.0.1",
+    "textlint-rule-ja-no-weak-phrase": "^1.0.2",
+    "textlint-rule-max-comma": "^1.0.2",
+    "textlint-rule-max-kanji-continuous-len": "^1.1.0",
+    "textlint-rule-max-ten": "^2.0.1",
+    "textlint-rule-no-double-negative-ja": "^1.0.4",
+    "textlint-rule-no-doubled-conjunction": "^1.0.2",
+    "textlint-rule-no-doubled-conjunctive-particle-ga": "^1.0.2",
+    "textlint-rule-no-doubled-joshi": "^3.3.0",
+    "textlint-rule-no-dropping-the-ra": "^1.0.3",
+    "textlint-rule-no-exclamation-question-mark": "^1.0.2",
+    "textlint-rule-no-hankaku-kana": "^1.0.1",
+    "textlint-rule-no-mix-dearu-desumasu": "^3.0.2",
+    "textlint-rule-no-nfd": "^1.0.1",
+    "textlint-rule-preset-jtf-style": "^2.2.1",
+    "textlint-rule-sentence-length": "^1.0.7",
     "textlint-rule-prh": "^3.1.3",
     "textlint-rule-spellcheck-tech-word": "^5.0.0"
+  },
+  "devDependencies": {
+    "markdown-toc": "^1.1.0",
+    "mocha": "^3.2.0"
   }
 }
