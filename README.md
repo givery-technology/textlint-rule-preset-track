@@ -173,7 +173,18 @@ textlint --preset codeprep README.md
 
 特定の感嘆符または感嘆符を使用する場合は、オプションで許可して利用してください。
 
-        "no-exclamation-question-mark": true,
+        "rules": {
+          "no-exclamation-question-mark": {
+            // allow to use !
+            "allowHalfWidthExclamation": false,
+            // allow to use ！
+            "allowFullWidthExclamation": true,
+            // allow to use ?
+            "allowHalfWidthQuestion": false,
+            // allow to use ？
+            "allowFullWidthQuestion": true
+          }
+        }
 
 ### 半角カナを使用しない
 > https://github.com/azu/textlint-rule-no-hankaku-kana

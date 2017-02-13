@@ -1,6 +1,6 @@
 {
   "name": "textlint-rule-preset-codeprep",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "textlint rule for CODEPREP",
   "main": "lib/textlint-rule-preset-codeprep.js",
   "scripts": {
