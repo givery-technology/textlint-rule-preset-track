@@ -81,14 +81,14 @@ textlint --preset codeprep README.md
             max: 3
         },
 
-### 連続できる最大の漢字長は5文字まで
+### 連続できる最大の漢字長は6文字まで
 > https://github.com/azu/textlint-rule-max-kanji-continuous-len
 
 漢字同士が連続していると読みにくさにつながります。
 固有名詞は `allow` オプションに記述して回避します。
 
         "max-kanji-continuous-len": {
-            max: 5
+            max: 6
         },
 
 ### 漢数字と算用数字を使い分けます
