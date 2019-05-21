@@ -1,7 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "pretest": "npm rm textlint-rule-preset-codeprep && npm i",
     "textlint": "textlint ./README.md",
     "test": "npm run textlint"
   },
