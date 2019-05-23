@@ -4,7 +4,7 @@
   "description": "textlint rule for Track",
   "main": "lib/textlint-rule-preset-track.js",
   "scripts": {
-    "docs:toc": "markdown-toc -i README.md",
+    "docs": "node script/generate_readme.js",
     "test": "mocha test/ && (cd example && npm install && npm test)"
   },
   "repository": {
@@ -49,7 +49,6 @@
     "textlint-rule-spellcheck-tech-word": "^5.0.0"
   },
   "devDependencies": {
-    "markdown-toc": "^1.2.0",
     "mocha": "^6.1.4"
   }
 }
