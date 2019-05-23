@@ -50,6 +50,7 @@
     "textlint-rule-spellcheck-tech-word": "^5.0.0"
   },
   "devDependencies": {
+    "markdown-toc": "^1.2.0",
     "mocha": "^6.1.4"
   }
 }

@@ -1,3 +1,5 @@
+const toc = require('markdown-toc');
+
 function createRuleObjects (presetFileText) {
   const lines = presetFileText.split('\n');
 
@@ -36,11 +38,7 @@ function createRuleObjects (presetFileText) {
 }
 
 function generateRuleListText (rules) {
-  const list = [];
-  for (let {title} of rules) {
-    list.push(`- [${title}](#${encodeURIComponent(title)})`);
-  }
-  return list.join('\n');
+  return toc(rules.map(rule => `# ${rule.title}`).join('\n')).content;
 }
 
 function generateRuleDescriptionsText (rules) {
