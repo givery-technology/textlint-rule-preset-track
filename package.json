@@ -1,19 +1,19 @@
 {
-  "name": "textlint-rule-preset-codeprep",
+  "name": "textlint-rule-preset-track",
   "version": "1.0.5",
-  "description": "textlint rule for CODEPREP",
-  "main": "lib/textlint-rule-preset-codeprep.js",
+  "description": "textlint rule for Track",
+  "main": "lib/textlint-rule-preset-track.js",
   "scripts": {
     "docs:toc": "markdown-toc -i README.md",
     "test": "mocha test/ && (cd example && npm install && npm test)"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/givery-technology/textlint-rule-preset-codeprep.git"
+    "url": "git+https://github.com/givery-technology/textlint-rule-preset-track.git"
   },
-  "homepage": "https://github.com/givery-technology/textlint-rule-preset-codeprep",
+  "homepage": "https://github.com/givery-technology/textlint-rule-preset-track",
   "bugs": {
-    "url": "https://github.com/givery-technology/textlint-rule-preset-codeprep/issues"
+    "url": "https://github.com/givery-technology/textlint-rule-preset-track/issues"
   },
   "author": "mitsuruog",
   "license": "MIT",

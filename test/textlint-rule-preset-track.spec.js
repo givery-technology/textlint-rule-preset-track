@@ -1,7 +1,7 @@
 "use strict";
 const assert = require("assert");
-const rules = require("../lib/textlint-rule-preset-codeprep").rules;
-const rulesConfig = require("../lib/textlint-rule-preset-codeprep").rulesConfig;
+const rules = require("../lib/textlint-rule-preset-track").rules;
+const rulesConfig = require("../lib/textlint-rule-preset-track").rulesConfig;
 
 describe("textlint-rule-preset-ja-technical-writing", function() {
   it("not missing key", function() {

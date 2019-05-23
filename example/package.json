@@ -6,6 +6,6 @@
   },
   "devDependencies": {
     "textlint": "^7.0.1",
-    "textlint-rule-preset-codeprep": "file:../"
+    "textlint-rule-preset-track": "file:../"
   }
 }

@@ -1,12 +1,12 @@
-# textlint-rule-preset-codeprep [![Build Status](https://travis-ci.org/givery-technology/textlint-rule-preset-codeprep.svg?branch=master)](https://travis-ci.org/givery-technology/textlint-rule-preset-codeprep)
+# textlint-rule-preset-track [![Build Status](https://travis-ci.org/givery-technology/textlint-rule-preset-track.svg?branch=master)](https://travis-ci.org/givery-technology/textlint-rule-preset-track)
 
-[textlint](https://textlint.github.io/) rule for [CODEPREP](https://codeprep.jp/).
+[textlint](https://textlint.github.io/) rule for [Track](https://github.com/givery-technology/track-contents).
 
 ## Install
 
 Install with [npm](https://www.npmjs.com/):
 
-    npm install textlint-rule-preset-codeprep
+    npm install textlint textlint-rule-preset-track --save-dev
 
 ## Usage
 
@@ -15,7 +15,7 @@ Via `.textlintrc`(Recommended)
 ```json
 {
     "rules": {
-        "preset-codeprep": true
+        "preset-track": true
     }
 }
 ```
@@ -23,7 +23,7 @@ Via `.textlintrc`(Recommended)
 Via CLI
 
 ```
-textlint --preset codeprep README.md
+textlint --preset track README.md
 ```
 
 ## ルール一覧
