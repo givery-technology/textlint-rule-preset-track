@@ -1,12 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "pretest": "npm rm textlint-rule-preset-codeprep && npm i",
+    "pretest": "npm rm textlint-rule-preset-track && npm i",
     "textlint": "textlint ./README.md",
     "test": "npm run textlint"
   },
   "devDependencies": {
     "textlint": "^7.0.1",
-    "textlint-rule-preset-codeprep": "file:../"
+    "textlint-rule-preset-track": "file:../"
   }
 }

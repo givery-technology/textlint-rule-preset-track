@@ -1,4 +1,4 @@
 version: 1
 rules:
-  - expected: CODEPREP
-    pattern:  /codeprep/ig
+  - expected: Track
+    pattern:  /track/ig
