@@ -38,7 +38,7 @@ function createRuleObjects (presetFileText) {
 function generateRuleListText (rules) {
   const list = [];
   for (let {title} of rules) {
-    list.push(`- [${title}](${encodeURIComponent(title)})`);
+    list.push(`- [${title}](#${encodeURIComponent(title)})`);
   }
   return list.join('\n');
 }
