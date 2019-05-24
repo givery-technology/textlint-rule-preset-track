@@ -4,8 +4,9 @@
   "description": "textlint rule for Track",
   "main": "lib/textlint-rule-preset-track.js",
   "scripts": {
-    "docs:toc": "markdown-toc -i README.md",
-    "test": "mocha test/ && (cd example && npm install && npm test)"
+    "docs": "node script/generate_readme.js",
+    "docs:test": "mocha script/test/",
+    "test": "mocha test/ && npm run docs:test && (cd example && npm install && npm test)"
   },
   "repository": {
     "type": "git",
