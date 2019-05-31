@@ -5,8 +5,10 @@
   "main": "lib/textlint-rule-preset-track.js",
   "scripts": {
     "docs": "node script/generate_readme.js",
-    "docs:test": "mocha script/test/",
-    "test": "mocha test/ && npm run docs:test && (cd example && npm install && npm test)"
+    "test": "mocha test/",
+    "test:example": "(cd example && npm install && npm test)",
+    "test:docs": "mocha script/test/generate_readme.spec.js",
+    "test:all": "npm run test && npm run test:example && npm run test:docs"
   },
   "repository": {
     "type": "git",
