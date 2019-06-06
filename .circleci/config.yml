@@ -1,0 +1,58 @@
+base_system: &base_system
+  docker:
+    - image: timbru31/node-alpine-git
+  working_directory: /root/src
+
+version: 2
+jobs:
+  build:
+    <<: *base_system
+    steps:
+      - checkout
+      - restore_cache:
+          keys: v1.0.5-dependencies-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1.0.5-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: .
+          paths:
+              - ./
+
+  test:
+    <<: *base_system
+    steps:
+      - attach_workspace:
+          at: .
+      - run: npm run test
+
+  test_example:
+    <<: *base_system
+    steps:
+      - attach_workspace:
+          at: .
+      - run: npm run test:example
+
+  test_docs:
+    <<: *base_system
+    steps:
+      - attach_workspace:
+          at: .
+      - run: npm run test:docs
+
+workflows:
+  version: 2
+  test_all:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - test_example:
+          requires:
+            - build
+      - test_docs:
+          requires:
+            - build
