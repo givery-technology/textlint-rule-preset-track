@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: dependencies-{{ checksum "package.json" }}
+          key: dependencies-{{ checksum "package.json" }}
       - run: npm install
       - save_cache:
           paths:
