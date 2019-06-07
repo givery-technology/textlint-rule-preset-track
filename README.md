@@ -1,5 +1,6 @@
-# textlint-rule-preset-track 
+# textlint-rule-preset-track
 
+[![npm version](https://badge.fury.io/js/textlint-rule-preset-track.svg)](https://badge.fury.io/js/textlint-rule-preset-track) 
 [![CircleCI](https://circleci.com/gh/givery-technology/textlint-rule-preset-track.svg?style=svg)](https://circleci.com/gh/givery-technology/textlint-rule-preset-track)
 
 [textlint](https://textlint.github.io/) rule for [Track](https://github.com/givery-technology/track-contents).
