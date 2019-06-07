@@ -10,12 +10,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: {{ checksum "package.json" }}
+          keys: dependencies-{{ checksum "package.json" }}
       - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: {{ checksum "package.json" }}
+          key: dependencies-{{ checksum "package.json" }}
       - persist_to_workspace:
           root: .
           paths:
