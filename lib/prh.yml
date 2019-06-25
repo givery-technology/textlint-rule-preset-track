@@ -1,4 +1,4 @@
 version: 1
 rules:
-  - expected: Track
-    pattern:  /track/ig
+  - expected: てみましょう
+    pattern:  て見ましょう
