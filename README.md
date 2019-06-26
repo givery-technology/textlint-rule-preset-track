@@ -35,6 +35,7 @@ textlint --preset track README.md
 - [コンマは1文中に3つまで](#%E3%82%B3%E3%83%B3%E3%83%9E%E3%81%AF1%E6%96%87%E4%B8%AD%E3%81%AB3%E3%81%A4%E3%81%BE%E3%81%A7)
 - [読点は1文中に3つまで](#%E8%AA%AD%E7%82%B9%E3%81%AF1%E6%96%87%E4%B8%AD%E3%81%AB3%E3%81%A4%E3%81%BE%E3%81%A7)
 - [連続できる最大の漢字長は6文字まで](#%E9%80%A3%E7%B6%9A%E3%81%A7%E3%81%8D%E3%82%8B%E6%9C%80%E5%A4%A7%E3%81%AE%E6%BC%A2%E5%AD%97%E9%95%B7%E3%81%AF6%E6%96%87%E5%AD%97%E3%81%BE%E3%81%A7)
+- [全角数字を使用しない](#%E5%85%A8%E8%A7%92%E6%95%B0%E5%AD%97%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%AA%E3%81%84)
 - [漢数字と算用数字を使い分けます](#%E6%BC%A2%E6%95%B0%E5%AD%97%E3%81%A8%E7%AE%97%E7%94%A8%E6%95%B0%E5%AD%97%E3%82%92%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91%E3%81%BE%E3%81%99)
 - [日付と曜日が矛盾していないかチェックする](#%E6%97%A5%E4%BB%98%E3%81%A8%E6%9B%9C%E6%97%A5%E3%81%8C%E7%9F%9B%E7%9B%BE%E3%81%97%E3%81%A6%E3%81%84%E3%81%AA%E3%81%84%E3%81%8B%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%81%99%E3%82%8B)
 - [よくある英語のスペルミスをチェックする](#%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E8%8B%B1%E8%AA%9E%E3%81%AE%E3%82%B9%E3%83%9A%E3%83%AB%E3%83%9F%E3%82%B9%E3%82%92%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%81%99%E3%82%8B)
@@ -105,6 +106,15 @@ textlint --preset track README.md
 "max-kanji-continuous-len": {
   max: 6
 },
+```
+
+### 全角数字を使用しない
+> https://github.com/azu/textlint-rule-preset-JTF-style
+> https://www.jtf.jp/jp/style_guide/styleguide_top.html
+
+
+```
+"no-zenkaku-numbers": true,
 ```
 
 ### 漢数字と算用数字を使い分けます
