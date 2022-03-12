@@ -159,7 +159,7 @@ textlint --preset track README.md
   "preferInHeader": "",
   "preferInBody": "ですます",
   "preferInList": "である",
-  "strict": true
+  "strict": false
 },
 ```
 
