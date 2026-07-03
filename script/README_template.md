@@ -1,7 +1,7 @@
 # textlint-rule-preset-track
 
 [![npm version](https://badge.fury.io/js/textlint-rule-preset-track.svg)](https://badge.fury.io/js/textlint-rule-preset-track) 
-[![CircleCI](https://circleci.com/gh/givery-technology/textlint-rule-preset-track.svg?style=svg)](https://circleci.com/gh/givery-technology/textlint-rule-preset-track)
+[![Actions Status](https://github.com/givery-technology/textlint-rule-preset-track/workflows/CI/badge.svg)](https://github.com/givery-technology/textlint-rule-preset-track/actions)
 
 [textlint](https://textlint.github.io/) rule for [Track](https://github.com/givery-technology/track-contents).
 
