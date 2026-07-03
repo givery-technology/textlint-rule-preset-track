@@ -66,6 +66,17 @@ textlint --preset track README.md
 - [AI的な誇張表現をチェックする](#ai%E7%9A%84%E3%81%AA%E8%AA%87%E5%BC%B5%E8%A1%A8%E7%8F%BE%E3%82%92%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%81%99%E3%82%8B)
 - [AI的な強調パターンをチェックする](#ai%E7%9A%84%E3%81%AA%E5%BC%B7%E8%AA%BF%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%82%92%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%81%99%E3%82%8B)
 - [テクニカルライティングのガイドラインに沿っているかチェックする](#%E3%83%86%E3%82%AF%E3%83%8B%E3%82%AB%E3%83%AB%E3%83%A9%E3%82%A4%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%AE%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%81%AB%E6%B2%BF%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%81%8B%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%81%99%E3%82%8B)
+- ["codeprep"文字は使わない](#codeprep%E6%96%87%E5%AD%97%E3%81%AF%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84)
+- [読点「、」を使わない](#%E8%AA%AD%E7%82%B9%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84)
+- [全角文字の前・後に半角カンマを使わない](#%E5%85%A8%E8%A7%92%E6%96%87%E5%AD%97%E3%81%AE%E5%89%8D%E3%83%BB%E5%BE%8C%E3%81%AB%E5%8D%8A%E8%A7%92%E3%82%AB%E3%83%B3%E3%83%9E%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84)
+- [カンマの後はスペースを置く](#%E3%82%AB%E3%83%B3%E3%83%9E%E3%81%AE%E5%BE%8C%E3%81%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E3%82%92%E7%BD%AE%E3%81%8F)
+- [全角数字を使わない](#%E5%85%A8%E8%A7%92%E6%95%B0%E5%AD%97%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84)
+- [漢数字を使わない (warning)](#%E6%BC%A2%E6%95%B0%E5%AD%97%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84-warning)
+- [textlint ディレクティブはコメントアウトする](#textlint-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%81%AF%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%81%99%E3%82%8B)
+- [mdformatter ディレクティブはコメントアウトする](#mdformatter-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%81%AF%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%81%99%E3%82%8B)
+- [コードブロックで言語を指定する](#%E3%82%B3%E3%83%BC%E3%83%89%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%E3%81%A7%E8%A8%80%E8%AA%9E%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%99%E3%82%8B)
+- [textlint ディレクティブの対応を取る](#textlint-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%81%AE%E5%AF%BE%E5%BF%9C%E3%82%92%E5%8F%96%E3%82%8B)
+- [mdformatter ディレクティブの対応を取る](#mdformatter-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E3%81%AE%E5%AF%BE%E5%BF%9C%E3%82%92%E5%8F%96%E3%82%8B)
 
 ### 1文の長さは90文字以下とする
 > https://github.com/azu/textlint-rule-sentence-length
@@ -415,7 +426,110 @@ documentation guideline に基づく情報提供ルールです (severity: info)
 ```
 "ai-tech-writing-guideline": {
   "severity": "info"
-}
+},
+```
+
+### "codeprep"文字は使わない
+
+旧サービス名の "codeprep" は使えません (URL と imageName は許可)。
+(text-checker からの移植ルール)
+
+```
+"no-codeprep": true,
+```
+
+### 読点「、」を使わない
+
+track の教材では読点に「,」を使います。
+(text-checker からの移植ルール。YAML 中の検査は text-checker が担当)
+
+```
+"no-ten": true,
+```
+
+### 全角文字の前・後に半角カンマを使わない
+
+全角文字と半角カンマの隣接は「、」の変換ミスの可能性があります。
+(text-checker からの移植ルール)
+
+```
+"no-hankaku-comma-around-zenkaku": true,
+```
+
+### カンマの後はスペースを置く
+
+文章中の「,」の後には半角スペースを置いてください。
+(text-checker からの移植ルール)
+
+```
+"hankaku-comma-space": true,
+```
+
+### 全角数字を使わない
+
+全角数字「０-９」ではなく半角数字を使ってください。
+(text-checker からの移植ルール)
+
+```
+"no-zenkaku-num": true,
+```
+
+### 漢数字を使わない (warning)
+
+数量を表す場合は算用数字を使ってください (慣用表現は exclude 済み)。
+使って良い場合もあるため severity は warning です。
+(text-checker からの移植ルール。旧 required: false 相当)
+
+```
+"no-kanji-num": {
+  "severity": "warning"
+},
+```
+
+### textlint ディレクティブはコメントアウトする
+
+<!-- textlint-disable --> などをそのまま書くと表示されるため、
+コメントアウトした形でのみ許可します (README.md は対象外)。
+(text-checker からの移植ルール)
+
+```
+"comment-out-textlint-directive": true,
+```
+
+### mdformatter ディレクティブはコメントアウトする
+
+<!-- mdformatter-disable --> なども同様にコメントアウトが必要です。
+(text-checker からの移植ルール)
+
+```
+"comment-out-mdformatter-directive": true,
+```
+
+### コードブロックで言語を指定する
+
+``` の後に言語を指定してください (main セクションは任意)。
+(text-checker からの移植ルール)
+
+```
+"code-block-language": true,
+```
+
+### textlint ディレクティブの対応を取る
+
+<!-- textlint-disable x --> には対応する <!-- textlint-enable x --> が必要です。
+(text-checker からの移植ルール)
+
+```
+"textlint-directive-pair": true,
+```
+
+### mdformatter ディレクティブの対応を取る
+
+<!-- mdformatter-disable --> には対応する <!-- mdformatter-enable --> が必要です。
+(text-checker からの移植ルール)
+
+```
+"mdformatter-directive-pair": true
 ```
 
 ## Contribution
