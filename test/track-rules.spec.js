@@ -207,4 +207,16 @@ describe("track rules (text-checker 移植)", function () {
       assert.strictEqual(messages.length, 1);
     });
   });
+
+  describe("no-inuki", function () {
+    it("い抜き言葉を検出する", async function () {
+      const messages = await lint("確認してます。\n", "no-inuki");
+      assert.strictEqual(messages.length, 1);
+    });
+
+    it("exclude (「捨てます」など) は許可される", async function () {
+      const messages = await lint("ゴミを捨てます。\n", "no-inuki");
+      assert.strictEqual(messages.length, 0);
+    });
+  });
 });
