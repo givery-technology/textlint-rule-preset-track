@@ -130,9 +130,9 @@ export = {
     // # 同じ助詞を連続して使用しない
     // https://github.com/azu/textlint-rule-no-doubled-joshi
     "no-doubled-joshi": {
-      // track の教材の読点は全角カンマ「，」(「、」は track/no-ten が禁止して
-      // いるため、デフォルトの ["、", "，"] から除いている)
-      "commaCharacters": ["，"],
+      // track の教材の読点は全角カンマ「，」(場合により半角カンマ「,」)。
+      // 「、」は track/no-ten が禁止しているため、デフォルトの ["、", "，"] から除く
+      "commaCharacters": ["，", ","],
       "min_interval": 1
     },
 
