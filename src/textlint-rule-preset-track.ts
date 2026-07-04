@@ -11,7 +11,6 @@ export = {
     "max-ten": moduleInterop(require("textlint-rule-max-ten")),
     "max-kanji-continuous-len": moduleInterop(require("textlint-rule-max-kanji-continuous-len")),
     "no-mix-dearu-desumasu": moduleInterop(require("textlint-rule-no-mix-dearu-desumasu")),
-    "ja-no-mixed-period": moduleInterop(require("textlint-rule-ja-no-mixed-period")),
     "no-zenkaku-numbers": jtfRules["2.1.8.算用数字"],
     "arabic-kanji-numbers": jtfRules["2.2.2.算用数字と漢数字の使い分け"],
     "date-weekday-mismatch": moduleInterop(require("textlint-rule-date-weekday-mismatch")),
@@ -116,15 +115,6 @@ export = {
       "preferInBody": "ですます",
       "preferInList": "である",
       "strict": false
-    },
-
-    // # 文末の句点記号として「。」を使います
-    // 文末には「。」を使い文を区切ります。
-    // 「。」のつけ忘れのチェックや「:」で文を区切らないようにします。
-    // https://github.com/textlint-ja/textlint-rule-ja-no-mixed-period
-    "ja-no-mixed-period": {
-      "periodMark": "。",
-      "forceAppendPeriod": true
     },
 
     // # 二重否定は使用しない
