@@ -1,17 +1,15 @@
-"use strict";
-
 // track-contents-course-automation の text-checker
 // (contents/text_checker_config.json のルール群) からの移植。
 // デフォルト値は移植時点の track-contents-course の本番設定に合わせている。
 // 各ルールは .textlintrc のオプションで regexp / exclude /
 // enabledInCodeBlock / enabledInCodeLine / excludeSections を上書きできる。
 
-const {
+import {
   createPatternRule,
   createCodeBlockLanguageRule,
   createDirectiveCommentRule,
   createDirectivePairRule,
-} = require("./track_rule_helper");
+} from "./track_rule_helper";
 
 // "codeprep"文字は使わない(ただし、URLとimageNameは許可する)
 const noCodeprep = createPatternRule({
@@ -149,7 +147,7 @@ const mdformatterDirectivePair = createDirectivePairRule({
   perRuleName: false,
 });
 
-module.exports = {
+export = {
   "no-codeprep": noCodeprep,
   "no-ten": noTen,
   "no-hankaku-comma-around-zenkaku": noHankakuCommaAroundZenkaku,

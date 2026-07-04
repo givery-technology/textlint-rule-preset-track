@@ -1,42 +1,41 @@
-"use strict";
-const interopRequire = require("interop-require");
-const path = require("path");
-const jtfRules = require("textlint-rule-preset-jtf-style").rules;
-const aiWritingRules = interopRequire("textlint-rule-preset-ai-writing").rules;
-const trackRules = require("./rules/track_rules");
+import path = require("path");
+import { moduleInterop } from "@textlint/module-interop";
+const jtfRules = moduleInterop(require("textlint-rule-preset-jtf-style")).rules;
+const aiWritingRules = moduleInterop(require("textlint-rule-preset-ai-writing")).rules;
+import trackRules = require("./rules/track_rules");
 
-module.exports = {
+export = {
   rules: {
-    "sentence-length": interopRequire("textlint-rule-sentence-length"),
-    "max-comma": interopRequire("textlint-rule-max-comma"),
-    "max-ten": interopRequire("textlint-rule-max-ten"),
-    "max-kanji-continuous-len": interopRequire("textlint-rule-max-kanji-continuous-len"),
-    "no-mix-dearu-desumasu": interopRequire("textlint-rule-no-mix-dearu-desumasu"),
-    "ja-no-mixed-period": interopRequire("textlint-rule-ja-no-mixed-period"),
+    "sentence-length": moduleInterop(require("textlint-rule-sentence-length")),
+    "max-comma": moduleInterop(require("textlint-rule-max-comma")),
+    "max-ten": moduleInterop(require("textlint-rule-max-ten")),
+    "max-kanji-continuous-len": moduleInterop(require("textlint-rule-max-kanji-continuous-len")),
+    "no-mix-dearu-desumasu": moduleInterop(require("textlint-rule-no-mix-dearu-desumasu")),
+    "ja-no-mixed-period": moduleInterop(require("textlint-rule-ja-no-mixed-period")),
     "no-zenkaku-numbers": jtfRules["2.1.8.算用数字"],
     "arabic-kanji-numbers": jtfRules["2.2.2.算用数字と漢数字の使い分け"],
-    "date-weekday-mismatch": interopRequire("textlint-rule-date-weekday-mismatch"),
-    "common-misspellings": interopRequire("textlint-rule-common-misspellings"),
-    "no-doubled-conjunction": interopRequire("textlint-rule-no-doubled-conjunction"),
-    "no-doubled-conjunctive-particle-ga": interopRequire("textlint-rule-no-doubled-conjunctive-particle-ga"),
-    "no-double-negative-ja": interopRequire("textlint-rule-no-double-negative-ja"),
-    "no-doubled-joshi": interopRequire("textlint-rule-no-doubled-joshi"),
-    "no-dropping-the-ra": interopRequire("textlint-rule-no-dropping-the-ra"),
-    "no-nfd": interopRequire("textlint-rule-no-nfd"),
-    "no-todo": interopRequire("textlint-rule-no-todo"),
-    "no-invalid-control-character": interopRequire("@textlint-rule/textlint-rule-no-invalid-control-character"),
-    "no-unmatched-pair": interopRequire("@textlint-rule/textlint-rule-no-unmatched-pair"),
-    "no-mixed-zenkaku-and-hankaku-alphabet": interopRequire("textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet"),
-    "no-insert-dropping-sa": interopRequire("@textlint-ja/textlint-rule-no-insert-dropping-sa"),
-    "no-exclamation-question-mark": interopRequire("textlint-rule-no-exclamation-question-mark"),
-    "no-hankaku-kana": interopRequire("textlint-rule-no-hankaku-kana"),
-    "ja-no-weak-phrase": interopRequire("textlint-rule-ja-no-weak-phrase"),
-    "ja-no-successive-word": interopRequire("textlint-rule-ja-no-successive-word"),
-    "ja-no-abusage": interopRequire("textlint-rule-ja-no-abusage"),
-    "ja-unnatural-alphabet": interopRequire("textlint-rule-ja-unnatural-alphabet"),
-    "prefer-tari-tari": interopRequire("textlint-rule-prefer-tari-tari"),
-    "spellcheck-tech-word": interopRequire("textlint-rule-spellcheck-tech-word"),
-    "prh": interopRequire("textlint-rule-prh"),
+    "date-weekday-mismatch": moduleInterop(require("textlint-rule-date-weekday-mismatch")),
+    "common-misspellings": moduleInterop(require("textlint-rule-common-misspellings")),
+    "no-doubled-conjunction": moduleInterop(require("textlint-rule-no-doubled-conjunction")),
+    "no-doubled-conjunctive-particle-ga": moduleInterop(require("textlint-rule-no-doubled-conjunctive-particle-ga")),
+    "no-double-negative-ja": moduleInterop(require("textlint-rule-no-double-negative-ja")),
+    "no-doubled-joshi": moduleInterop(require("textlint-rule-no-doubled-joshi")),
+    "no-dropping-the-ra": moduleInterop(require("textlint-rule-no-dropping-the-ra")),
+    "no-nfd": moduleInterop(require("textlint-rule-no-nfd")),
+    "no-todo": moduleInterop(require("textlint-rule-no-todo")),
+    "no-invalid-control-character": moduleInterop(require("@textlint-rule/textlint-rule-no-invalid-control-character")),
+    "no-unmatched-pair": moduleInterop(require("@textlint-rule/textlint-rule-no-unmatched-pair")),
+    "no-mixed-zenkaku-and-hankaku-alphabet": moduleInterop(require("textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet")),
+    "no-insert-dropping-sa": moduleInterop(require("@textlint-ja/textlint-rule-no-insert-dropping-sa")),
+    "no-exclamation-question-mark": moduleInterop(require("textlint-rule-no-exclamation-question-mark")),
+    "no-hankaku-kana": moduleInterop(require("textlint-rule-no-hankaku-kana")),
+    "ja-no-weak-phrase": moduleInterop(require("textlint-rule-ja-no-weak-phrase")),
+    "ja-no-successive-word": moduleInterop(require("textlint-rule-ja-no-successive-word")),
+    "ja-no-abusage": moduleInterop(require("textlint-rule-ja-no-abusage")),
+    "ja-unnatural-alphabet": moduleInterop(require("textlint-rule-ja-unnatural-alphabet")),
+    "prefer-tari-tari": moduleInterop(require("textlint-rule-prefer-tari-tari")),
+    "spellcheck-tech-word": moduleInterop(require("textlint-rule-spellcheck-tech-word")),
+    "prh": moduleInterop(require("textlint-rule-prh")),
     "no-ai-list-formatting": aiWritingRules["no-ai-list-formatting"],
     "no-ai-hype-expressions": aiWritingRules["no-ai-hype-expressions"],
     "no-ai-emphasis-patterns": aiWritingRules["no-ai-emphasis-patterns"],

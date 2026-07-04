@@ -1,5 +1,3 @@
-"use strict";
-
 // track-contents-course-automation の text-checker から移植したルール群の共通実装。
 // 旧実装は生テキストの行スキャンだったが、textlint の AST ベースに書き直している。
 //
@@ -8,22 +6,51 @@
 // - enabledInCodeLine:  Code (インラインコード) ノードを検査対象に含めるか
 // - excludeSections:    「## 名前」「### 名前」で始まるセクション配下を検査しない
 
-const path = require("path");
+import path = require("path");
+import type {
+  TextlintRuleContext,
+  TextlintRuleModule,
+  TextlintRuleReportHandler,
+} from "@textlint/types";
+import type { TxtNode } from "@textlint/ast-node-types";
+
+// Html ノードは raw HTML を value に持つ (@textlint/ast-node-types の TxtNode には無いため補う)
+type TxtNodeWithValue = TxtNode & { value?: string };
+
+export interface TrackRuleOptions {
+  description?: string;
+  regexp?: string | string[];
+  exclude?: string | string[] | null;
+  enabledInCodeBlock?: boolean;
+  enabledInCodeLine?: boolean;
+  excludeSections?: string[];
+  skipReadme?: boolean;
+}
+
+export interface DirectiveCommentRuleDefaults extends TrackRuleOptions {
+  marker: string;
+}
+
+export interface DirectivePairRuleDefaults extends TrackRuleOptions {
+  filterRegexp: RegExp;
+  perRuleName: boolean;
+}
 
 const DEFAULT_OPTIONS = {
+  description: "",
   enabledInCodeBlock: true,
   enabledInCodeLine: true,
-  excludeSections: [],
+  excludeSections: [] as string[],
 };
 
-function toArray(value) {
+function toArray(value: string | string[] | null | undefined): string[] {
   if (value == null) return [];
   return Array.isArray(value) ? value : [value];
 }
 
-function isReadme(context) {
+function isReadme(context: TextlintRuleContext): boolean {
   const filePath = context.getFilePath();
-  return Boolean(filePath) && path.basename(filePath) === "README.md";
+  return Boolean(filePath) && path.basename(filePath as string) === "README.md";
 }
 
 // text-checker と同じセクション判定 (「## 名前」「### 名前」。「(」以降は名前に含めない)
@@ -33,12 +60,12 @@ const SECTION_RE = /^(###?) (.+?)(\(|$)/;
  * 現在のセクション名を Header ノードで追跡する。
  * 返り値の handlers を visitor にマージして使う。
  */
-function createSectionTracker(context) {
+function createSectionTracker(context: TextlintRuleContext) {
   const { Syntax, getSource } = context;
-  let current = null;
+  let current: string | null = null;
   return {
     handlers: {
-      [Syntax.Header](node) {
+      [Syntax.Header](node: TxtNode) {
         const line = getSource(node).split("\n")[0];
         const matched = line.match(SECTION_RE);
         if (matched) {
@@ -46,7 +73,7 @@ function createSectionTracker(context) {
         }
       },
     },
-    isExcluded(excludeSections) {
+    isExcluded(excludeSections: string[]): boolean {
       return current !== null && excludeSections.includes(current);
     },
   };
@@ -56,7 +83,7 @@ function createSectionTracker(context) {
  * exclude にマッチした範囲を同じ長さの空白に置き換える。
  * (元実装は削除していたが、位置を保ったマッチ報告のためにマスクにしている)
  */
-function maskExcluded(text, excludes) {
+function maskExcluded(text: string, excludes: RegExp[]): string {
   let masked = text;
   for (const e of excludes) {
     e.lastIndex = 0;
@@ -70,25 +97,27 @@ function maskExcluded(text, excludes) {
  * Str / Html (+ オプションにより CodeBlock / Code) ノードのテキストを検査し、
  * マッチ箇所を報告する。
  */
-function createPatternRule(defaults) {
+export function createPatternRule(
+  defaults: TrackRuleOptions
+): TextlintRuleModule<TrackRuleOptions> {
   return function rule(context, userOptions) {
     const options = Object.assign({}, DEFAULT_OPTIONS, defaults, userOptions || {});
     const { Syntax, RuleError, report, getSource, locator } = context;
 
     if (options.skipReadme && isReadme(context)) {
-      return {};
+      return {} as TextlintRuleReportHandler;
     }
 
     const regexps = toArray(options.regexp).map((r) => new RegExp(r, "g"));
     const excludes = toArray(options.exclude).map((e) => new RegExp(e, "g"));
     const tracker = createSectionTracker(context);
 
-    const check = (node) => {
+    const check = (node: TxtNode) => {
       if (tracker.isExcluded(options.excludeSections)) {
         return;
       }
       const text = maskExcluded(getSource(node), excludes);
-      const matches = [];
+      const matches: Array<[number, number]> = [];
       for (const re of regexps) {
         re.lastIndex = 0;
         let matched;
@@ -117,7 +146,7 @@ function createPatternRule(defaults) {
       }
     };
 
-    const visitors = Object.assign({}, tracker.handlers, {
+    const visitors: Record<string, (node: TxtNode) => void> = Object.assign({}, tracker.handlers, {
       [Syntax.Str]: check,
       [Syntax.Html]: check,
     });
@@ -137,7 +166,9 @@ function createPatternRule(defaults) {
  * 元実装と同じく「``` のみの開始フェンス」だけを対象にする
  * (インデントコードブロックや ~~~ フェンスは対象外)。
  */
-function createCodeBlockLanguageRule(defaults) {
+export function createCodeBlockLanguageRule(
+  defaults: TrackRuleOptions
+): TextlintRuleModule<TrackRuleOptions> {
   return function rule(context, userOptions) {
     const options = Object.assign({}, DEFAULT_OPTIONS, defaults, userOptions || {});
     const { Syntax, RuleError, report, getSource } = context;
@@ -145,7 +176,7 @@ function createCodeBlockLanguageRule(defaults) {
     const tracker = createSectionTracker(context);
 
     return Object.assign({}, tracker.handlers, {
-      [Syntax.CodeBlock](node) {
+      [Syntax.CodeBlock](node: TxtNode) {
         if (tracker.isExcluded(options.excludeSections)) {
           return;
         }
@@ -164,23 +195,25 @@ function createCodeBlockLanguageRule(defaults) {
  * ディレクティブは Html ノードとして現れる。判定は元実装と同じ行頭の正規表現
  * (`// ` などでコメントアウトされていれば許可) をノードの開始行に適用する。
  */
-function createDirectiveCommentRule(defaults) {
+export function createDirectiveCommentRule(
+  defaults: DirectiveCommentRuleDefaults
+): TextlintRuleModule<TrackRuleOptions> {
   return function rule(context, userOptions) {
     const options = Object.assign({}, DEFAULT_OPTIONS, defaults, userOptions || {});
     const { Syntax, RuleError, report, getSource } = context;
 
     if (options.skipReadme && isReadme(context)) {
-      return {};
+      return {} as TextlintRuleReportHandler;
     }
 
     const lineRe = new RegExp(toArray(options.regexp)[0]);
-    let lines = [];
+    let lines: string[] = [];
 
     return {
-      [Syntax.Document](node) {
+      [Syntax.Document](node: TxtNode) {
         lines = getSource(node).split("\n");
       },
-      [Syntax.Html](node) {
+      [Syntax.Html](node: TxtNodeWithValue) {
         if (!node.value || !node.value.includes(options.marker)) {
           return;
         }
@@ -199,16 +232,24 @@ function createDirectiveCommentRule(defaults) {
  * perRuleName: true の場合 (textlint 用)、ルール名ごとに対応を判定する。
  * コードブロック内のディレクティブは Html ノードにならないため自然に対象外になる。
  */
-function createDirectivePairRule(defaults) {
+export function createDirectivePairRule(
+  defaults: DirectivePairRuleDefaults
+): TextlintRuleModule<TrackRuleOptions> {
   return function rule(context, userOptions) {
     const options = Object.assign({}, DEFAULT_OPTIONS, defaults, userOptions || {});
     const { Syntax, RuleError, report, locator } = context;
 
     const re = new RegExp(options.filterRegexp.source, "g");
-    // 対応する enable が現れていない disable の位置 (キー: ルール名)
-    const startingFilter = {};
 
-    const reportAt = (entry) => {
+    interface DirectiveEntry {
+      node: TxtNode;
+      index: number;
+      length: number;
+    }
+    // 対応する enable が現れていない disable の位置 (キー: ルール名)
+    const startingFilter: Record<string, DirectiveEntry | null> = {};
+
+    const reportAt = (entry: DirectiveEntry) => {
       report(
         entry.node,
         new RuleError(options.description, {
@@ -218,15 +259,15 @@ function createDirectivePairRule(defaults) {
     };
 
     return {
-      [Syntax.Html](node) {
-        const value = node.value || "";
+      [Syntax.Html](node: TxtNodeWithValue) {
+        const value: string = node.value || "";
         re.lastIndex = 0;
         let matched;
         while ((matched = re.exec(value)) !== null) {
           const isDisable = matched[1] === "disable";
           const key = options.perRuleName ? matched[2] : "";
           const isPair = Number(isDisable) ^ Number(Boolean(startingFilter[key]));
-          const entry = { node, index: matched.index, length: matched[0].length };
+          const entry: DirectiveEntry = { node, index: matched.index, length: matched[0].length };
           if (!isPair) {
             reportAt(entry);
           }
@@ -243,11 +284,3 @@ function createDirectivePairRule(defaults) {
     };
   };
 }
-
-module.exports = {
-  DEFAULT_OPTIONS,
-  createPatternRule,
-  createCodeBlockLanguageRule,
-  createDirectiveCommentRule,
-  createDirectivePairRule,
-};

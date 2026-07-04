@@ -8,7 +8,10 @@
     "test": "mocha test/",
     "test:example": "(cd example && npm install && npm test)",
     "test:docs": "mocha script/test/generate_readme.spec.js",
-    "test:all": "npm run test && npm run test:example && npm run test:docs"
+    "test:all": "npm run test && npm run test:example && npm run test:docs",
+    "build": "tsc && cp src/prh.yml lib/prh.yml",
+    "prepare": "npm run build",
+    "pretest": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,8 +24,8 @@
   "author": "mitsuruog",
   "license": "MIT",
   "files": [
-    "src/",
-    "lib/"
+    "lib/",
+    "src/"
   ],
   "keywords": [
     "textlint",
@@ -32,7 +35,7 @@
     "@textlint-ja/textlint-rule-no-insert-dropping-sa": "^2.0.1",
     "@textlint-rule/textlint-rule-no-invalid-control-character": "^3.0.0",
     "@textlint-rule/textlint-rule-no-unmatched-pair": "^2.0.4",
-    "interop-require": "^1.0.0",
+    "@textlint/module-interop": "^15.7.1",
     "textlint-rule-common-misspellings": "^1.0.1",
     "textlint-rule-date-weekday-mismatch": "^1.1.1",
     "textlint-rule-ja-no-abusage": "^3.0.0",
@@ -62,13 +65,18 @@
     "textlint-rule-spellcheck-tech-word": "^5.0.0"
   },
   "devDependencies": {
+    "@textlint/ast-node-types": "^15.7.1",
     "@textlint/kernel": "^15.7.1",
     "@textlint/textlint-plugin-markdown": "^15.7.1",
+    "@textlint/types": "^15.7.1",
+    "@types/node": "^22.0.0",
     "markdown-toc": "^1.2.0",
     "mocha": "^11.7.5",
-    "textlint": "^15.7.1"
+    "textlint": "^15.7.1",
+    "typescript": "^5.9.0"
   },
   "engines": {
     "node": ">=20"
-  }
+  },
+  "types": "lib/textlint-rule-preset-track.d.ts"
 }

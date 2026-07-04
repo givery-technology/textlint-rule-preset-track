@@ -9,7 +9,7 @@ const {
   generateReadmeText
 } = require('../lib/readme_generator');
 
-const PRESET_FILE = path.join(__dirname, '..', '..', 'lib', 'textlint-rule-preset-track.js');
+const PRESET_FILE = path.join(__dirname, '..', '..', 'src', 'textlint-rule-preset-track.ts');
 const README_TEMPLATE_FILE = path.join(__dirname, '..', 'README_template.md');
 const EXISTED_README_FILE = path.join(__dirname, '..', '..', 'README.md');
 
