@@ -59,8 +59,7 @@
     "textlint-rule-preset-jtf-style": "^3.0.3",
     "textlint-rule-prh": "^6.1.0",
     "textlint-rule-sentence-length": "^5.2.1",
-    "textlint-rule-spellcheck-tech-word": "^5.0.0",
-    "textlint-rule-terminology": "^5.2.16"
+    "textlint-rule-spellcheck-tech-word": "^5.0.0"
   },
   "devDependencies": {
     "@textlint/kernel": "^15.7.1",
