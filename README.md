@@ -205,9 +205,9 @@ textlint --preset track README.md
 
 ```
 "no-doubled-joshi": {
-  // track の教材は読点に半角カンマ「,」を使う (「、」は track/no-ten が禁止)
-  // ため、「,」を読点として認識させて助詞の重複判定の誤検知を減らす
-  "commaCharacters": [","],
+  // track の教材の読点は全角カンマ「，」(「、」は track/no-ten が禁止して
+  // いるため、デフォルトの ["、", "，"] から除いている)
+  "commaCharacters": ["，"],
   "min_interval": 1
 },
 ```
