@@ -8,7 +8,6 @@ export = {
   rules: {
     "sentence-length": moduleInterop(require("textlint-rule-sentence-length")),
     "max-comma": moduleInterop(require("textlint-rule-max-comma")),
-    "max-ten": moduleInterop(require("textlint-rule-max-ten")),
     "max-kanji-continuous-len": moduleInterop(require("textlint-rule-max-kanji-continuous-len")),
     "no-mix-dearu-desumasu": moduleInterop(require("textlint-rule-no-mix-dearu-desumasu")),
     "no-zenkaku-numbers": jtfRules["2.1.8.算用数字"],
@@ -64,13 +63,6 @@ export = {
     // カンマ（,）の多用は、文が長くなっている可能性があります。
     // https://github.com/azu/textlint-rule-max-comma
     "max-comma": {
-      max: 3
-    },
-
-    // # 読点は1文中に3つまで
-    // 読点（、）の多用は、文が長くなっている可能性があります。
-    // https://github.com/azu/textlint-rule-max-ten
-    "max-ten": {
       max: 3
     },
 
@@ -138,6 +130,9 @@ export = {
     // # 同じ助詞を連続して使用しない
     // https://github.com/azu/textlint-rule-no-doubled-joshi
     "no-doubled-joshi": {
+      // track の教材は読点に半角カンマ「,」を使う (「、」は track/no-ten が禁止)
+      // ため、「,」を読点として認識させて助詞の重複判定の誤検知を減らす
+      "commaCharacters": [","],
       "min_interval": 1
     },
 

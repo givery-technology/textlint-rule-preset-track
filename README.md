@@ -33,7 +33,6 @@ textlint --preset track README.md
 
 - [1文の長さは90文字以下とする](#1%E6%96%87%E3%81%AE%E9%95%B7%E3%81%95%E3%81%AF90%E6%96%87%E5%AD%97%E4%BB%A5%E4%B8%8B%E3%81%A8%E3%81%99%E3%82%8B)
 - [コンマは1文中に3つまで](#%E3%82%B3%E3%83%B3%E3%83%9E%E3%81%AF1%E6%96%87%E4%B8%AD%E3%81%AB3%E3%81%A4%E3%81%BE%E3%81%A7)
-- [読点は1文中に3つまで](#%E8%AA%AD%E7%82%B9%E3%81%AF1%E6%96%87%E4%B8%AD%E3%81%AB3%E3%81%A4%E3%81%BE%E3%81%A7)
 - [連続できる最大の漢字長は6文字まで](#%E9%80%A3%E7%B6%9A%E3%81%A7%E3%81%8D%E3%82%8B%E6%9C%80%E5%A4%A7%E3%81%AE%E6%BC%A2%E5%AD%97%E9%95%B7%E3%81%AF6%E6%96%87%E5%AD%97%E3%81%BE%E3%81%A7)
 - [全角数字を使用しない](#%E5%85%A8%E8%A7%92%E6%95%B0%E5%AD%97%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%AA%E3%81%84)
 - [漢数字と算用数字を使い分けます](#%E6%BC%A2%E6%95%B0%E5%AD%97%E3%81%A8%E7%AE%97%E7%94%A8%E6%95%B0%E5%AD%97%E3%82%92%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91%E3%81%BE%E3%81%99)
@@ -95,17 +94,6 @@ textlint --preset track README.md
 
 ```
 "max-comma": {
-  max: 3
-},
-```
-
-### 読点は1文中に3つまで
-> https://github.com/azu/textlint-rule-max-ten
-
-読点（、）の多用は、文が長くなっている可能性があります。
-
-```
-"max-ten": {
   max: 3
 },
 ```
@@ -217,6 +205,9 @@ textlint --preset track README.md
 
 ```
 "no-doubled-joshi": {
+  // track の教材は読点に半角カンマ「,」を使う (「、」は track/no-ten が禁止)
+  // ため、「,」を読点として認識させて助詞の重複判定の誤検知を減らす
+  "commaCharacters": [","],
   "min_interval": 1
 },
 ```
@@ -518,6 +509,14 @@ track の教材では読点に「,」を使います。
 ```
 "mdformatter-directive-pair": true
 ```
+
+## 削除したルール
+
+過去に含まれていて削除したルールとその理由 (v2.0.0):
+
+- **terminology**: v5 で既定辞書が大幅拡大し、`git` などのコマンド名まで校正対象になり技術教材と相性が悪いため削除。必要になったら textlint-rule-terminology を利用側で直接導入し、辞書を絞って設定する。
+- **ja-no-mixed-period**: 誤判定が多く、利用側 (track-contents-course) でもほぼ全体で無効化されていたため削除。
+- **max-ten**: 「、」の多用チェックだが、track では `no-ten` が「、」自体を全面禁止しているため原理的に発火不能だった。「,」の多用チェックは `max-comma` が担当する。
 
 ## Contribution
 

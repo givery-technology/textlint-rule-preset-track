@@ -35,6 +35,14 @@ textlint --preset track README.md
 
 {RuleDescriptions}
 
+## 削除したルール
+
+過去に含まれていて削除したルールとその理由 (v2.0.0):
+
+- **terminology**: v5 で既定辞書が大幅拡大し、`git` などのコマンド名まで校正対象になり技術教材と相性が悪いため削除。必要になったら textlint-rule-terminology を利用側で直接導入し、辞書を絞って設定する。
+- **ja-no-mixed-period**: 誤判定が多く、利用側 (track-contents-course) でもほぼ全体で無効化されていたため削除。
+- **max-ten**: 「、」の多用チェックだが、track では `no-ten` が「、」自体を全面禁止しているため原理的に発火不能だった。「,」の多用チェックは `max-comma` が担当する。
+
 ## Contribution
 
 - `README.md` を更新する際は、 `/script/README_template.md` を編集し、 `npm run docs` を実行して自動生成してください（`README.md` は直接編集しないでください）。
