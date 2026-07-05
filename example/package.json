@@ -5,7 +5,7 @@
     "test": "npm run textlint"
   },
   "devDependencies": {
-    "textlint": "^7.0.1",
+    "textlint": "^15.7.1",
     "textlint-rule-preset-track": "file:../"
   }
 }
